@@ -9,7 +9,7 @@ namespace Engine {
 		Application();
 
 		virtual ~Application();		// virtual because this class will be subclassed by SandBox app
-									// when this destructor is called, Sandbox destructor must be callsed too	???
+									// when this destructor is called, Sandbox destructor must be called too	???
 
 		void Run();
 
