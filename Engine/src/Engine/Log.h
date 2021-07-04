@@ -6,7 +6,8 @@
 
 #include "Core.h"
 #include "spdlog/spdlog.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include "spdlog/sinks/stdout_color_sinks.h"		// do we need this ???
+#include "spdlog/fmt/ostr.h"
 
 namespace Engine {
 
@@ -20,6 +21,7 @@ namespace Engine {
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;		
 		static std::shared_ptr<spdlog::logger> s_ClientLogger;		
+
 	};
 
 }

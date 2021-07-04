@@ -6,16 +6,16 @@
 
 namespace Engine {
 
-	class ENGINE_API KeyEvent : public Event
+	class ENGINE_API KeyEvent : public Event	// why type of inheritance is needed?	???
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
-	protected:
+		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput) 
+	protected:							
 		KeyEvent(int keycode)
 			: m_KeyCode(keycode) {}
-
+		
 		int m_KeyCode;
 	};
 
