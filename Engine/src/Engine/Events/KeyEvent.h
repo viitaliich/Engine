@@ -2,20 +2,20 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Engine {
 
-	class ENGINE_API KeyEvent : public Event	// why type of inheritance is needed?	???
+	// protected constructor, so can't created object of this class
+	// Singleton?
+	class ENGINE_API KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput) 
-	protected:							
+		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+	protected:
 		KeyEvent(int keycode)
 			: m_KeyCode(keycode) {}
-		
+
 		int m_KeyCode;
 	};
 

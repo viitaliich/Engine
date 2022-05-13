@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <Engine.h>		// For this dirrectory (Solution)\Engine\src is included to additional dirrectories on properties
 
 class Sandbox : public Engine::Application{		// all specifiers stays unchanched, so why do we use public?

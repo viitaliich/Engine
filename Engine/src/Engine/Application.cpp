@@ -1,12 +1,15 @@
+#include "pch.h"
+
 #include "Application.h"
 
 #include "Engine/Events/ApplicationEvent.h"
-#include "Engine/Log.h"
+
+#include <GLFW/glfw3.h>
 
 namespace Engine {
 
 	Application::Application() {
-
+		m_Window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application() {
@@ -15,18 +18,12 @@ namespace Engine {
 
 	void Application::Run() {
 		
-		// why not EventCategoryApplication | EventCategoryInput
-		WindowResizeEvent e(1280, 720);
-		if (e.IsInCategory(EventCategoryApplication))
+		while (m_Running)
 		{
-			EG_TRACE(e);
+			glClearColor(1, 0, 1, 1);		// set color buffer will be cleared with
+			glClear(GL_COLOR_BUFFER_BIT);	// clears setted buffer
+			m_Window->OnUpdate();
 		}
-		if (e.IsInCategory(EventCategoryInput))
-		{
-			EG_TRACE(e);
-		}
-
-		while (true);
 
 	}
 

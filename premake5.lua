@@ -1,4 +1,4 @@
-workspace "Engine"			
+workspace "Engine"
 	architecture "x64"
 
 	configurations
@@ -10,6 +10,13 @@ workspace "Engine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+
+--- Include GLFW premake file into here
+include "Engine/vendor/GLFW"
+
 project "Engine"
 	location "Engine"
 	kind "SharedLib"
@@ -17,6 +24,9 @@ project "Engine"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "pch.h"
+	pchsource "%{prj.name}/src/pch.cpp"
 
 	files
 	{
@@ -27,12 +37,19 @@ project "Engine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
 	}
 
-	filter "system:windows"		-- Limits the subsequent build settings to a particular environment.
+	links 
+	{ 
+		"GLFW",
+		"opengl32.lib"
+	}
+
+	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"		-- linking runtime libraries staticly
+		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -48,7 +65,7 @@ project "Engine"
 
 	filter "configurations:Debug"
 		defines "EG_DEBUG"
-		symbols "On"		-- debug symbols
+		symbols "On"
 
 	filter "configurations:Release"
 		defines "EG_RELEASE"
@@ -65,6 +82,9 @@ project "Sandbox"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "pch.h"
+	pchsource "%{prj.name}/src/pch.cpp"
 
 	files
 	{
@@ -103,4 +123,4 @@ project "Sandbox"
 
 	filter "configurations:Dist"
 		defines "EG_DIST"
-		optimize "On" 
+		optimize "On"

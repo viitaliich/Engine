@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Engine {
 
 	class ENGINE_API MouseMovedEvent : public Event
@@ -23,7 +21,7 @@ namespace Engine {
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
 		float m_MouseX, m_MouseY;
 	};
@@ -45,7 +43,7 @@ namespace Engine {
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
 		float m_XOffset, m_YOffset;
 	};
@@ -63,7 +61,6 @@ namespace Engine {
 		int m_Button;
 	};
 
-	// why there is no repeatCount in MouseEvent?	???
 	class ENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
