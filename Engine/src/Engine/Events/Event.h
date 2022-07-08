@@ -49,8 +49,9 @@ namespace Engine {
 
 	class ENGINE_API Event
 	{
-		friend class EventDispatcher;	// EventDispatcher can access to private members of Event
 	public:
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;		// const - we can't modify class members variables.
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -60,8 +61,6 @@ namespace Engine {
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;
 	};
 
 	// ???
@@ -86,7 +85,7 @@ namespace Engine {
 			if (m_Event.GetEventType() == T::GetStaticType())	// @@@
 			{
 				// function is called with passed event
-				m_Event.m_Handled = func(*(T*)&m_Event);		// ???
+				m_Event.Handled = func(*(T*)&m_Event);		// ???
 				return true;
 			}
 			return false;

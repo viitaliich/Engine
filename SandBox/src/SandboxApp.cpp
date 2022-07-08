@@ -1,14 +1,36 @@
 #include "pch.h"
-#include <Engine.h>		// For this dirrectory (Solution)\Engine\src is included to additional dirrectories on properties
+#include <Engine.h>		// For this directory (Solution)\Engine\src is included to additional directories on properties
 
-class Sandbox : public Engine::Application{		// all specifiers stays unchanched, so why do we use public?
-
+class ExampleLayer : public Engine::Layer
+{
 public:
-	Sandbox() {
-
+	ExampleLayer()
+		: Layer("Example")
+	{
 	}
 
-	~Sandbox() {
+	void OnUpdate() override
+	{
+		EG_INFO("ExampleLayer::Update");
+	}
+
+	void OnEvent(Engine::Event& event) override
+	{
+		EG_TRACE("Layer Event - {0}", event);
+	}
+
+};
+
+class Sandbox : public Engine::Application{		// all specifiers stays unchanged, so why do we use public?
+
+public:
+	Sandbox() 
+	{
+		PushLayer(new ExampleLayer());
+	}
+
+	~Sandbox() 
+	{
 
 	}
 
