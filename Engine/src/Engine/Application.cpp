@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-#include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
 // this ???
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1) 
@@ -23,7 +23,7 @@ namespace Engine {
 		while (m_Running)
 		{
 			glClearColor(1, 0, 1, 1);		// set color buffer will be cleared with
-			glClear(GL_COLOR_BUFFER_BIT);	// clears setted buffer
+			glClear(GL_COLOR_BUFFER_BIT);	// clears set buffer
 			
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
