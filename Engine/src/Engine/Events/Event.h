@@ -17,7 +17,7 @@ namespace Engine {
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
 		// KeyEvent.h
-		KeyPressed, KeyReleased,
+		KeyPressed, KeyReleased, KeyTyped,
 		// MouseEvent.h
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};

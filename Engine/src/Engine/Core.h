@@ -22,3 +22,5 @@
 
 // if bit at position X is needed, 1 moves left on X bits
 #define BIT(x) (1 << x)
+
+#define EG_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) 

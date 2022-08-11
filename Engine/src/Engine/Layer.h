@@ -8,7 +8,7 @@ namespace Engine {
 	class ENGINE_API Layer
 	{
 	public:
-		Layer(const std::string& debugName = "Layer");	// debug name of the layer
+		Layer(const std::string& name = "Layer");	// debug name of the layer
 		virtual ~Layer();	// virtual destructor -> it's going to be subclassed
 
 		virtual void OnAttach() {}

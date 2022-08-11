@@ -11,7 +11,7 @@ public:
 
 	void OnUpdate() override
 	{
-		EG_INFO("Update");
+		EG_INFO("ExampleLayer::Update");
 	}
 
 	void OnEvent(Engine::Event& event) override
@@ -27,6 +27,7 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new Engine::ImGuiLayer());
 	}
 
 	~Sandbox() 
