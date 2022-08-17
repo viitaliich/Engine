@@ -63,7 +63,6 @@ namespace Engine {
 		}
 	};
 
-	// ???
 	// To dispatch events based on their type.
 	// We can receive any type of event. 
 	class EventDispatcher
@@ -82,9 +81,8 @@ namespace Engine {
 		// func is implemented somewhere in engine (usually where event is handled)
 		bool Dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())	// @@@
+			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				// function is called with passed event
 				m_Event.Handled = func(*(T*)&m_Event);		// ???
 				return true;
 			}

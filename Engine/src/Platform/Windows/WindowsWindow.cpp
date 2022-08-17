@@ -42,8 +42,7 @@ namespace Engine {
 
 		if (!s_GLFWInitialized)
 		{
-			// ???
-			// TODO: glfwTerminate on system shutdown
+			// ??? TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			EG_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
