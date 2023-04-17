@@ -40,7 +40,6 @@ namespace Engine {
 	};
 
 // static - we don't need an instance of event to know that this event is event))
-// see @@@ comment below.
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
@@ -93,7 +92,6 @@ namespace Engine {
 	};
 
 	// for logs
-	// ???
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();

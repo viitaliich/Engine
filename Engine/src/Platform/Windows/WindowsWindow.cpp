@@ -10,7 +10,7 @@
 
 namespace Engine {
 
-	static bool s_GLFWInitialized = false;		// static - we can initialize 2+ windows	static ???
+	static bool s_GLFWInitialized = false;		// static - we can initialize 2+ windows
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
