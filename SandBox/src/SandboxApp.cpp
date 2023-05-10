@@ -1,6 +1,8 @@
 #include "pch.h"
 #include <Engine.h>		// For this directory (Solution)\Engine\src is included to additional directories on properties
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Engine::Layer
 {
 public:
@@ -14,6 +16,13 @@ public:
 		if (Engine::Input::IsKeyPressed(EG_KEY_TAB))
 			EG_TRACE("Tab key is pressed (poll)!");
 	}
+
+	/*virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
+	}*/
 
 	void OnEvent(Engine::Event& event) override
 	{
@@ -34,7 +43,6 @@ public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Engine::ImGuiLayer());
 	}
 
 	~Sandbox() 
