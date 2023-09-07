@@ -9,7 +9,7 @@ namespace Engine {
 	{
 	public:
 		Layer(const std::string& name = "Layer");	// debug name of the layer
-		virtual ~Layer();	// virtual destructor -> it's going to be subclassed
+		virtual ~Layer() = default;	// virtual destructor -> it's going to be subclassed
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}

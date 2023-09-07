@@ -24,8 +24,6 @@ namespace Engine {
         glGenVertexArrays(1, &m_VertexArray);
         glBindVertexArray(m_VertexArray);
 
-        glGenBuffers(1, &m_VertexBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
         // ??? watch OpenGL series
 
         // clock counter-wise
@@ -37,17 +35,15 @@ namespace Engine {
 
         // STATIC_DRAW - we won't update data in further frame
         // ARRAY_BUFFER == vertex buffer
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
         // ??? OpenGL series
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-        glGenBuffers(1, &m_IndexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-
-        unsigned int indices[3] = { 0, 1, 2 };
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        uint32_t indices[3] = { 0, 1, 2 };
+        m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
         // location 0 coresponds to glEnableVertexAttribArray(0);
         // variables passed between shaders are called varying, so v_ in name
@@ -77,10 +73,6 @@ namespace Engine {
         m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
 	}
 
-	Application::~Application() {
-
-	}
-
 	void Application::Run() {
 		
 		while (m_Running)
@@ -90,7 +82,7 @@ namespace Engine {
 			
             m_Shader->Bind(); 
             glBindVertexArray(m_VertexArray);
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
