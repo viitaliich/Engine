@@ -29,7 +29,11 @@ namespace Engine {
     OpenGLVertexArray::OpenGLVertexArray()
     {
         // ??? what is the difference between glGenVertexArrays and glCreateVertexArrays
-        glCreateVertexArrays(1, &m_RendererID);
+        float gl_version;
+        glGetFloatv(GL_VERSION, &gl_version);
+        if(gl_version >= 4.5f)
+            glCreateVertexArrays(1, &m_RendererID); // ??? gen
+        glGenVertexArrays(1, &m_RendererID); // ??? gen
     }
 
     OpenGLVertexArray::~OpenGLVertexArray()
