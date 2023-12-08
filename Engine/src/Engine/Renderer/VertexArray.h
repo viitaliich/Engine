@@ -10,10 +10,11 @@ namespace Engine {
     public:
         virtual ~VertexArray() {}
 
+        // These are good for testing, but not really needed for engine ???
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
 
-        // shared pointer because every resource must be reference counted.
+        // shared pointer because every resource must be reference counted ???
         virtual void AddVertexBuffer(const std::shared_ptr<VertexBuffer>& vertexBuffer) = 0;
         virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer) = 0;
 

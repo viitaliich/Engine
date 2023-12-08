@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-#include <glad/glad.h>
+#include "Engine/Renderer/Renderer.h"
 
 #include "Input.h"		// ??? do we need it here?
 
@@ -63,7 +63,7 @@ namespace Engine {
         };
 
         std::shared_ptr<VertexBuffer> squareVB;
-        squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+        squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));       // ??? reset
         squareVB->SetLayout({
             { ShaderDataType::Float3, "a_Position" }
             });
@@ -140,16 +140,23 @@ namespace Engine {
 		
 		while (m_Running)
 		{
-            glClearColor(0.1f, 0.1f, 0.1f, 1);		// set color buffer will be cleared with
-			glClear(GL_COLOR_BUFFER_BIT);	// clears set buffer
+            RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+            RenderCommand::Clear();
+
+            Renderer::BeginScene();
 			
+            // ??? why glDrawElements using IndexBuffer?
             m_BlueShader->Bind();
-            m_SquareVA->Bind();
-            glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            //m_SquareVA->Bind();
+            //glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_SquareVA);
 
             m_Shader->Bind();
-            m_VertexArray->Bind();
-            glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            //m_VertexArray->Bind();
+            //glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::Submit(m_VertexArray);
+
+            Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();

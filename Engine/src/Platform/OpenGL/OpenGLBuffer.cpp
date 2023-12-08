@@ -23,6 +23,7 @@ namespace Engine {
 
     void OpenGLVertexBuffer::Bind() const
     {
+        // why do we need Bind and how it works?
         glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
     }
 
